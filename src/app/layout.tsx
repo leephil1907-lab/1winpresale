@@ -5,11 +5,12 @@ import { site } from "@/config";
 
 const title = `${site.tokenName} (${site.ticker}) — Token Presale on TRON`;
 const description =
-  "$1WIN is a TRC-20 utility token on TRON powering rewards, cashback, staking " +
-  "and exclusive experiences across the 1win ecosystem. Join the presale.";
+  "Independent TRON-based concept for a $1WIN-style token sale. This is not the official 1win token sale; sale participation remains unavailable until contract and terms are verified.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.siteUrl),
+  ...(process.env.NEXT_PUBLIC_SITE_URL
+    ? { metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL) }
+    : {}),
   title: {
     default: title,
     template: `%s · ${site.tokenName}`,
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: `${site.tokenName} — ${site.ticker} presale live on TRON`,
+        alt: `${site.tokenName} — independent TRON concept; sale not configured`,
       },
     ],
   },
