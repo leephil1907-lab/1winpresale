@@ -149,4 +149,5 @@ export const links = {
   audit: "#",
   terms: "#",
   privacy: "#",
+  supportEmail: "support@1wintoken.com",
 };

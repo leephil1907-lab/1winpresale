@@ -11,6 +11,7 @@ import Roadmap from "@/components/Roadmap";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import StickySaleBar from "@/components/StickySaleBar";
+import LiveChat from "@/components/LiveChat";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
       <Faq />
       <Footer />
       <StickySaleBar />
+      <LiveChat />
     </main>
   );
 }
