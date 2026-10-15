@@ -30,7 +30,8 @@ const LABELS: Record<ItemId, string> = {
  * a verified contract/indexer is connected; never synthesize participant data.
  */
 export default function Marquee() {
-  const oversub = publicSale.statsAvailable && publicSale.goalUsd > 0
+  const statsAvailable = false;
+  const oversub = statsAvailable && publicSale.goalUsd > 0
     ? (publicSale.raisedUsd / publicSale.goalUsd).toFixed(2)
     : null;
   const ends = new Date(publicSale.saleEndDate).toLocaleDateString("en-US", {
@@ -44,13 +45,13 @@ export default function Marquee() {
           <b className="font-semibold text-slate-400">Awaiting verified data</b>
         );
       case "pool":
-        return <b className="font-semibold text-slate-400">{publicSale.statsAvailable ? usd(publicSale.raisedUsd) : "Awaiting verified data"}</b>;
+        return <b className="font-semibold text-slate-400">{statsAvailable ? usd(publicSale.raisedUsd) : "Awaiting verified data"}</b>;
       case "oversub":
         return <b className="font-semibold text-slate-400">{oversub ? `×${oversub}` : "Not available"}</b>;
       case "price":
-        return <b className="font-semibold text-white">${publicSale.priceUsd.toFixed(2)} USDC</b>;
+        return <b className="font-semibold text-white">${publicSale.priceUsd.toFixed(2)} reference</b>;
       case "bonus":
-        return <b className="font-semibold text-slate-400">{publicSale.stageBonusPct > 0 ? `+${publicSale.stageBonusPct}%` : "Not announced"}</b>;
+        return <b className="font-semibold text-slate-400">Not announced</b>;
       case "supply":
         return <b className="font-semibold text-white">{publicSale.supplyOnSale}</b>;
       case "network":
