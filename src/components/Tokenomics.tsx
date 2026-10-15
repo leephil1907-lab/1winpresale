@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { links, sale, site, tokenomics } from "@/config";
+import { links, publicSale, sale, site, tokenomics } from "@/config";
 
 const R = 80;
 const C = 2 * Math.PI * R;
@@ -63,7 +63,7 @@ export default function Tokenomics() {
       value: `${site.network} (${site.tokenStandard})`,
       mono: false,
     },
-    { label: "Stage 1 price", value: `$${sale.tokenPriceUsd}`, mono: false },
+    { label: "Reference sale price", value: `${sale.tokenPriceUsd}`, mono: false },
     { label: "Contract", value: links.contractAddress, mono: true },
   ];
 
@@ -82,9 +82,7 @@ export default function Tokenomics() {
             <span className="gradient-text">the long game</span>
           </h2>
           <p className="mt-5 max-w-lg leading-relaxed text-slate-400">
-            The allocation below is designed to put the majority of supply in
-            the hands of the community, with team tokens locked behind a
-            published vesting schedule.
+            Allocation categories and percentages follow the public reference layout. Confirm the TRON token issuer, legal terms, and final allocation documents before treating these figures as launch terms.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
