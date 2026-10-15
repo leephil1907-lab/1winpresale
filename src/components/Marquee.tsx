@@ -30,7 +30,7 @@ const LABELS: Record<ItemId, string> = {
  * a verified contract/indexer is connected; never synthesize participant data.
  */
 export default function Marquee() {
-  const statsAvailable = false;
+  const statsAvailable = publicSale.statsAvailable;
   const oversub = statsAvailable && publicSale.goalUsd > 0
     ? (publicSale.raisedUsd / publicSale.goalUsd).toFixed(2)
     : null;
@@ -40,7 +40,7 @@ export default function Marquee() {
     switch (id) {
       case "participants":
         return (
-          <b className="font-semibold text-slate-400">Awaiting verified data</b>
+          <b className="font-semibold text-slate-400">{statsAvailable ? publicSale.participants.toLocaleString("en-US") : "Awaiting verified data"}</b>
         );
       case "pool":
         return <b className="font-semibold text-slate-400">{statsAvailable ? usd(publicSale.raisedUsd) : "Awaiting verified data"}</b>;
