@@ -3,19 +3,15 @@ import { links, site } from "@/config";
 
 const STEPS = [
   {
-    title: "Get a TRON wallet",
-    text: "Install TronLink or any TRC-20 compatible wallet, and back up your recovery phrase offline. Never share it with anyone.",
+    title: "Connect your wallet",
+    text: "Use TronLink on the TRON network. Confirm the site address and review every wallet request before approving it.",
   },
   {
-    title: "Fund it",
-    text: "Buy TRX or USDT (TRC-20) on any major exchange and withdraw it to your wallet address.",
+    title: "Prepare your contribution",
+    text: "When the sale is enabled, use the supported TRX or USDT (TRC-20) payment option and follow the published minimum and sale terms.",
   },
   {
-    title: "Connect wallet",
-    text: "When a verified TRON sale contract and published terms are available, connect TronLink and review the transaction details before approving anything.",
-  },
-  {
-    title: "Claim when enabled",
+    title: "Claim your tokens",
     text: "Claiming remains unavailable until a verified contract, token distribution address and claim rules are published and tested.",
   },
 ];
@@ -30,12 +26,12 @@ export default function HowToBuy() {
               How to buy
             </p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Four steps to <span className="gradient-text">{site.ticker}</span>
+              How to participate in the <span className="gradient-text">{site.ticker}</span> sale
             </h2>
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal key={s.title} delay={i * 100}>
               <div className="card card-hover group relative h-full p-6">
