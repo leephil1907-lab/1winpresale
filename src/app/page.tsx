@@ -12,10 +12,12 @@ import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import StickySaleBar from "@/components/StickySaleBar";
 import LiveChat from "@/components/LiveChat";
+import AmbientOrbs from "@/components/AmbientOrbs";
 
 export default function Home() {
   return (
     <main className="relative pb-24 lg:pb-0">
+      <AmbientOrbs />
       <Header />
       <Hero />
       <Marquee />
