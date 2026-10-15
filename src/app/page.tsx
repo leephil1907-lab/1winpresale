@@ -7,6 +7,7 @@ import Leader from "@/components/Leader";
 import WhyToken from "@/components/WhyToken";
 import PricingDeck from "@/components/PricingDeck";
 import TopParticipants from "@/components/TopParticipants";
+import Litepaper from "@/components/Litepaper";
 import HowToBuy from "@/components/HowToBuy";
 import TopParticipants from "@/components/TopParticipants";
 import HowToBuy from "@/components/HowToBuy";
@@ -40,6 +41,7 @@ export default function Home() {
       <WhyToken />
       <PricingDeck />
       <Tokenomics />
+      <Litepaper />
       <TopParticipants />
       <HowToBuy />
       <Roadmap />
