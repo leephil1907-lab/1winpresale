@@ -122,10 +122,10 @@ export default function BuyWidget() {
         {/* ---- sale status card ---- */}
         <div className="card p-6 text-center sm:p-8">
           <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-            Token Sale ends in
+            {live ? "Token Sale ends in" : "Token Sale status"}
           </h2>
           <div className="mt-4">
-            <Countdown />
+            {live ? <Countdown /> : <div className="mx-auto inline-flex items-center gap-2 rounded-xl border border-amber-400/20 bg-amber-300/[0.06] px-4 py-3 text-sm font-semibold text-amber-100/80"><span className="h-2 w-2 rounded-full bg-amber-300" />Sale not configured</div>}
           </div>
 
           <div className="mt-6 rounded-2xl border border-line bg-ink-800/80 p-5 text-left">
