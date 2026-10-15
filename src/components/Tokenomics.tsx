@@ -1,5 +1,15 @@
 import Reveal from "./Reveal";
-import { links, publicSale, sale, site, tokenomics } from "@/config";
+import { links, sale, site, tokenomics } from "@/config";
+
+const referenceAllocations = [
+  { label: "Games", pct: 25, color: "#00dc6e" },
+  { label: "Liquidity", pct: 20, color: "#22d3ee" },
+  { label: "Wager rewards", pct: 18, color: "#a78bfa" },
+  { label: "Token sale", pct: 13, color: "#f6c453" },
+  { label: "Treasury", pct: 10, color: "#64748b" },
+  { label: "TMA airdrop", pct: 8, color: "#fb7185" },
+  { label: "Marketing", pct: 6, color: "#60a5fa" },
+];
 
 const R = 80;
 const C = 2 * Math.PI * R;
