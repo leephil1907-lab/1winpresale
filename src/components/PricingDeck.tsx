@@ -12,7 +12,7 @@ const CARDS = [
   {
     n: "02",
     title: "Token buyback",
-    text: "A recurring repurchase program buys tokens back from the open market on a schedule.",
+    text: "A buyback model is described in the reference; schedule and execution require public verification.",
     bg: "bg-[#4a7fd8]",
     fg: "text-white",
     chip: "bg-white/20 text-white",
@@ -20,7 +20,7 @@ const CARDS = [
   {
     n: "03",
     title: "Token burning",
-    text: "A portion of tokens is permanently removed from circulation, tightening available supply over time.",
+    text: "Token burns can permanently remove supply when supported by verifiable on-chain transactions.",
     bg: "bg-[#c9a26b]",
     fg: "text-[#241708]",
     chip: "bg-black/15 text-[#241708]",
@@ -28,7 +28,7 @@ const CARDS = [
   {
     n: "04",
     title: "Value growth",
-    text: "Ongoing buyback-and-burn plus real platform demand are designed to support long-term token economics.",
+    text: "The proposed model links ecosystem activity and token economics; it does not guarantee token price performance.",
     bg: "bg-[#1e9e76]",
     fg: "text-white",
     chip: "bg-white/20 text-white",
