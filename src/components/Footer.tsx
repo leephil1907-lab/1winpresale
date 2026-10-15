@@ -13,6 +13,9 @@ const COLUMNS = [
       { label: "Why us", href: "#why-token" },
       { label: "Pricing", href: "#pricing" },
       { label: "Tokenomics", href: "#tokenomics" },
+      { label: "LitePaper", href: "#litepaper" },
+      { label: "Top participants", href: "#top-participants" },
+      { label: "How to buy", href: "#how-to-buy" },
       { label: "Roadmap", href: "#roadmap" },
       { label: "FAQ", href: "#faq" },
     ],
@@ -20,9 +23,9 @@ const COLUMNS = [
   {
     title: "Useful links",
     links: [
-      { label: "Whitepaper", href: links.whitepaper },
-      { label: "Audit report", href: links.audit },
-      { label: "Contract", href: "#" },
+      { label: "LitePaper", href: "#litepaper" },
+      { label: "Verification status", href: "#verification" },
+      { label: "Sale status", href: "#buy" },
       { label: "Terms and Conditions", href: links.terms },
       { label: "Privacy Policy", href: links.privacy },
     ],
