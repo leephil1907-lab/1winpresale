@@ -11,7 +11,7 @@ const QA = [
   },
   {
     q: `How can I claim ${site.tokenName}?`,
-    a: "Deposit during the token sale using TRX, USDT or USDC. Your allocation is recorded on the sale contract, and after the sale ends you claim your tokens on this site once claims open (TGE).",
+    a: "The TRON sale is not configured yet. Participation and claiming instructions will be published only after the sale contract, token distribution and claim rules have been verified.",
   },
   {
     q: "Where can I use tokens?",
@@ -19,7 +19,7 @@ const QA = [
   },
   {
     q: "Do the tokens have a vesting period?",
-    a: "Sale allocations are unlocked at TGE. Team and partner allocations follow a separate long-term vesting schedule, which will be detailed in the token documentation.",
+    a: "The vesting and unlock rules for this TRON adaptation have not been published. Review the final token documentation before participating.",
   },
   {
     q: "What is token burning, and how does it affect value?",
@@ -27,7 +27,7 @@ const QA = [
   },
   {
     q: "What is token BuyBack?",
-    a: "BuyBack is a recurring treasury program that repurchases tokens from the open market on a schedule. A share of repurchased tokens can then be burned, further managing circulating supply.",
+    a: "Buyback is described as part of the reference token model. Any buyback or burn for this TRON adaptation should be considered inactive until execution terms and verifiable on-chain records are published.",
   },
 ];
 
