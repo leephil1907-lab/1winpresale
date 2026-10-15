@@ -22,7 +22,7 @@ const fmt = (n: number, max = 2) =>
 
 export default function BuyWidget() {
   const wallet = useTronWallet();
-  const [currency, setCurrency] = useState("USDC");
+  const [currency, setCurrency] = useState("USDT");
   const [amount, setAmount] = useState("10");
   const [curOpen, setCurOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -36,12 +36,11 @@ export default function BuyWidget() {
   const net = saleIntegration.network;
   const netName = networkLabel(net);
 
-  const currencies = Object.keys(referenceRatesUsd);
+  const currencies = ["TRX", "USDT"];
   const pay = Number.parseFloat(amount) || 0;
   const usd = pay * (referenceRatesUsd[currency] ?? 1);
   const base = usd / publicSale.priceUsd;
-  const bonus = (base * publicSale.stageBonusPct) / 100;
-  const receive = base + bonus;
+  const receive = base;
   const belowMin = pay > 0 && usd < publicSale.minContributionUsd;
   const statsAvailable = false; // Keep public figures hidden until an authoritative sale data source is connected.
   const progress = statsAvailable && publicSale.goalUsd > 0 ? (publicSale.raisedUsd / publicSale.goalUsd) * 100 : 0;
@@ -230,7 +229,7 @@ export default function BuyWidget() {
           </p>
           {pay > 0 && (
             <p className="mt-1.5 text-center text-xs text-slate-500">
-              You receive ≈ <b className="text-white">{fmt(receive, 0)} {site.ticker}</b>
+              Estimated amount ≈ <b className="text-white">{fmt(receive, 0)} {site.ticker}</b>
               {publicSale.stageBonusPct > 0 && (
                 <> · incl. {fmt(bonus, 0)} bonus ({publicSale.stageBonusPct}%)</>
               )}
