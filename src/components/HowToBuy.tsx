@@ -11,12 +11,12 @@ const STEPS = [
     text: "Buy TRX or USDT (TRC-20) on any major exchange and withdraw it to your wallet address.",
   },
   {
-    title: "Connect & swap",
-    text: "When the sale opens, connect your wallet in the presale widget above and swap TRX or USDT for $1WIN.",
+    title: "Connect wallet",
+    text: "When a verified TRON sale contract and published terms are available, connect TronLink and review the transaction details before approving anything.",
   },
   {
-    title: "Claim at TGE",
-    text: "Your $1WIN is distributed to the same wallet after the presale ends. Claim instructions will be published here.",
+    title: "Claim when enabled",
+    text: "Claiming remains unavailable until a verified contract, token distribution address and claim rules are published and tested.",
   },
 ];
 
