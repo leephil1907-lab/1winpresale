@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@theme {
+  /* TRX-style dark + red palette */
+  --color-ink-950: #080506;
+  --color-ink-900: #0c080a;
+  --color-ink-800: #130b0e;
+  --color-ink-700: #1c1014;
+  --color-line: rgba(255, 130, 130, 0.14);
+
+  --color-flame-300: #ff8a8a;
+  --color-flame-400: #ff4049;
+  --color-flame-500: #e50914;
+
+  --color-gold-300: #fde08a;
+  --color-gold-400: #f6c453;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-2deg);
+    }
+    50% {
+      transform: translateY(-16px) rotate(2deg);
+    }
+  }
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 96px;
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: #cbd5e1;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(229, 9, 20, 0.4);
+  color: #ffffff;
+}
+
+/* ---------- helpers ---------- */
+
+.gradient-text {
+  background: linear-gradient(92deg, #ff8a8a 0%, #ff2433 40%, #f6c453 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(28, 16, 20, 0.72),
+    rgba(10, 7, 8, 0.92)
+  );
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 64, 73, 0.35);
+  box-shadow: 0 18px 50px -20px rgba(229, 9, 20, 0.45);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(92deg, #ff2433, #b00020);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.9rem;
+  box-shadow: 0 10px 34px -10px rgba(229, 9, 20, 0.65);
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 14px 40px -10px rgba(229, 9, 20, 0.8);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* moving shine on hover */
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  height: 100%;
+  width: 45%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.32),
+    transparent
+  );
+  transform: skewX(-22deg);
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+.btn-primary:hover:not(:disabled)::after {
+  left: 135%;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 130, 130, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 130, 130, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 65% at 50% 0%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 85% 65% at 50% 0%,
+    #000 55%,
+    transparent 100%
+  );
+  animation: panGrid 14s linear infinite;
+}
+@keyframes panGrid {
+  to {
+    background-position:
+      44px 44px,
+      44px 44px;
+  }
+}
+
+/* ---------- motion primitives ---------- */
+
+/* load-in for hero / above-the-fold blocks */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* scroll reveal (used by <Reveal/>) */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal-x-left {
+  transform: translateX(-38px);
+}
+.reveal-x-right {
+  transform: translateX(38px);
+}
+.reveal.is-visible,
+.reveal.is-visible.reveal-x-left,
+.reveal.is-visible.reveal-x-right {
+  opacity: 1;
+  transform: none;
+}
+
+/* small value "pop" when a number changes */
+@keyframes pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0.35;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.tick-pop {
+  animation: pop 0.3s ease;
+}
+
+/* tokenomics donut segments grow in */
+@keyframes segIn {
+  from {
+    opacity: 0;
+    stroke-width: 0;
+  }
+}
+.reveal.is-visible .donut-seg {
+  animation: segIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 130ms);
+}
+
+/* modal entrance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+}
+.modal-backdrop {
+  animation: fadeIn 0.2s ease both;
+}
+.modal-card {
+  animation: modalIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* progress bar shine */
+.progress-shine {
+  position: relative;
+  overflow: hidden;
+}
+.progress-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shine 2.4s ease-in-out infinite;
+}
+@keyframes shine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+/* marquee pauses while hovered */
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* accessibility: honor reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
