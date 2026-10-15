@@ -26,18 +26,20 @@ export const site = {
 export const publicSale = {
   /** USD price per token (6-dec USDC terms on the sale screen) */
   priceUsd: 0.03,
-  /** USD raised so far */
-  raisedUsd: 5_141_221,
+  /** Sale totals remain unavailable until connected to verified contract/indexer data. */
+  statsAvailable: false,
+  /** USD raised so far; do not display while statsAvailable is false. */
+  raisedUsd: 0,
   /** Sale soft cap / pool target in USD */
   goalUsd: 3_900_000,
-  /** Contributor count */
-  participants: 1_424,
+  /** Contributor count; do not display while statsAvailable is false. */
+  participants: 0,
   /** Tokens allocated to this sale (display string) */
   supplyOnSale: "130 M",
   /** ISO end date driving the countdowns */
   saleEndDate: "2026-10-30T00:00:00Z",
-  /** stage bonus percent shown in the widget (set 0 to hide) */
-  stageBonusPct: 10,
+  /** No bonus is advertised until verified sale-stage terms are configured. */
+  stageBonusPct: 0,
   /** minimum contribution in USD */
   minContributionUsd: 10,
 };
@@ -62,7 +64,6 @@ export const sale = {
 export const referenceRatesUsd: Record<string, number> = {
   TRX: 0.33,
   USDT: 1,
-  USDC: 1,
 };
 
 /** Company stats (PLACEHOLDERS — only publish figures you can substantiate). */
@@ -111,7 +112,6 @@ export const saleIntegration = {
   tokens: {
     mainnet: {
       USDT: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-      USDC: "TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8",
     },
     nile: {
       USDT: "TXLAQ63Xg1NAzckPwKHvzw7CSEmLMEqcdj",
@@ -130,11 +130,13 @@ export const saleIntegration = {
 export const tokenomics = {
   totalSupply: 1_000_000_000,
   allocations: [
-    { label: "Public presale", pct: 40, color: "#00dc6e" },
-    { label: "Liquidity & listings", pct: 20, color: "#22d3ee" },
-    { label: "Ecosystem rewards", pct: 20, color: "#a78bfa" },
-    { label: "Marketing & partners", pct: 10, color: "#f6c453" },
-    { label: "Team (vested)", pct: 10, color: "#64748b" },
+    { label: "Games", pct: 25, color: "#00dc6e" },
+    { label: "Liquidity", pct: 20, color: "#22d3ee" },
+    { label: "Wager rewards", pct: 18, color: "#a78bfa" },
+    { label: "Token sale", pct: 13, color: "#f6c453" },
+    { label: "Treasury", pct: 10, color: "#64748b" },
+    { label: "TMA airdrop", pct: 8, color: "#fb7185" },
+    { label: "Marketing", pct: 6, color: "#60a5fa" },
   ],
 };
 
