@@ -42,7 +42,7 @@ export default function BuyWidget() {
   const base = usd / publicSale.priceUsd;
   const receive = base;
   const belowMin = pay > 0 && usd < publicSale.minContributionUsd;
-  const statsAvailable = false; // Keep public figures hidden until an authoritative sale data source is connected.
+  const statsAvailable = publicSale.statsAvailable;
   const progress = statsAvailable && publicSale.goalUsd > 0 ? (publicSale.raisedUsd / publicSale.goalUsd) * 100 : 0;
 
   // close the currency dropdown on outside click
