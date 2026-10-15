@@ -6,78 +6,68 @@ import { site } from "@/config";
 
 const QA = [
   {
-    q: `What is ${site.ticker}?`,
-    a: `${site.tokenName} (${site.ticker}) is a ${site.tokenStandard} utility token on the ${site.network} network. It is designed to power rewards, cashback, staking and exclusive access across the ecosystem.`,
+    q: `What is ${site.tokenName}?`,
+    a: `${site.tokenName} (${site.ticker}) is a ${site.tokenStandard} utility token on the ${site.network} network, designed for use across the 1win ecosystem — from in-game utility to rewards and perks.`,
   },
   {
-    q: "Why build on TRON?",
-    a: "TRON offers fast confirmations and very low transaction fees, which makes it well suited for high-frequency reward and cashback mechanics. TRC-20 is also supported by most major wallets and exchanges.",
+    q: `How can I claim ${site.tokenName}?`,
+    a: "Deposit during the token sale using TRX, USDT or USDC. Your allocation is recorded on the sale contract, and after the sale ends you claim your tokens on this site once claims open (TGE).",
   },
   {
-    q: "How do I buy in the presale?",
-    a: "Once the sale opens, connect a TRON-compatible wallet (e.g. TronLink) in the widget above and swap TRX or USDT for $1WIN. Only use the contract address published on this site.",
+    q: "Where can I use tokens?",
+    a: "The token is intended for in-game utility within the ecosystem — games, sports wagering benefits, rewards tiers and future features on the roadmap.",
   },
   {
-    q: "When do I receive my tokens?",
-    a: "Tokens are distributed at the Token Generation Event (TGE), shortly after the presale ends. Exact claim instructions will be published on this page before TGE.",
+    q: "Do the tokens have a vesting period?",
+    a: "Sale allocations are unlocked at TGE. Team and partner allocations follow a separate long-term vesting schedule, which will be detailed in the token documentation.",
   },
   {
-    q: "Is there a vesting schedule?",
-    a: "Yes — team and advisor allocations are locked and released on a published vesting schedule. Final vesting terms will be detailed in the whitepaper.",
+    q: "What is token burning, and how does it affect value?",
+    a: "Burning permanently removes tokens from circulation, reducing available supply. Combined with steady demand, burning is designed to support healthier token economics over time — it is not a price guarantee.",
   },
   {
-    q: "Is this financial advice?",
-    a: "No. Nothing on this website is financial, legal or investment advice. Crypto assets are volatile and high risk — only spend what you can afford to lose and always do your own research.",
+    q: "What is token BuyBack?",
+    a: "BuyBack is a recurring treasury program that repurchases tokens from the open market on a schedule. A share of repurchased tokens can then be burned, further managing circulating supply.",
   },
 ];
 
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      id="faq"
-      className="relative border-t border-line bg-ink-900/40 py-20 sm:py-28"
-    >
+    <section id="faq" className="relative py-16 sm:py-24">
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
-        <Reveal>
-          <div className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-flame-400">
-              FAQ
-            </p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Questions, <span className="gradient-text">answered</span>
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 space-y-3">
+        <div className="space-y-3">
           {QA.map((item, i) => {
             const open = openIndex === i;
             return (
-              <Reveal key={item.q} delay={i * 70}>
+              <Reveal key={item.q} delay={i * 60}>
                 <div
-                  className={`card overflow-hidden transition-colors duration-300 ${
-                    open ? "border-flame-400/30" : ""
+                  className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                    open
+                      ? "border-flame-400/30 bg-ink-700"
+                      : "border-line bg-ink-800 hover:border-white/15"
                   }`}
                 >
                   <button
-                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                    className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
                     onClick={() => setOpenIndex(open ? null : i)}
                     aria-expanded={open}
                   >
-                    <span className="font-semibold text-white">{item.q}</span>
+                    <span className="text-base font-bold text-white sm:text-lg">
+                      {item.q}
+                    </span>
                     <svg
                       width="18"
                       height="18"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`shrink-0 text-flame-400 transition-transform duration-300 ${
-                        open ? "rotate-180" : ""
+                      className={`shrink-0 text-slate-500 transition-transform duration-300 ${
+                        open ? "rotate-180 text-flame-400" : ""
                       }`}
                     >
                       <polyline points="6 9 12 15 18 9" />
@@ -91,7 +81,7 @@ export default function Faq() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <p className="px-5 pb-5 text-sm leading-relaxed text-slate-400">
+                      <p className="px-5 pb-5 text-sm leading-relaxed text-slate-400 sm:px-6">
                         {item.a}
                       </p>
                     </div>

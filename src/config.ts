@@ -3,8 +3,9 @@ import oneWinPresaleAbi from "../contracts/artifacts/OneWinPresale.abi.json";
 /**
  * ---------------------------------------------------------------------------
  *  SITE CONFIG — single source of truth for every number/string on the page.
- *  ⚠️  ALL VALUES BELOW ARE PLACEHOLDERS. Replace with your final, approved
- *  values (sale dates, prices, raised amounts, contract address, links).
+ *  ⚠️  ALL VALUES BELOW ARE PLACEHOLDERS (some match the reference site for
+ *  convenience). Replace with your final, approved values before launch and
+ *  never display stats you cannot substantiate.
  * ---------------------------------------------------------------------------
  */
 
@@ -14,37 +15,48 @@ export const site = {
   network: "TRON",
   tokenStandard: "TRC-20",
   siteUrl: "https://1wintoken.com",
-  tagline: "The utility token of the 1win gaming universe",
+  tagline: "Token from the iGaming leader",
   description:
     "$1WIN is a utility token on the TRON network designed to power rewards, cashback, " +
     "staking and exclusive experiences across the 1win ecosystem — with fast, " +
     "low-fee TRC-20 transfers.",
 };
 
-export const sale = {
-  stageLabel: "Presale · Stage 1",
-  /** PLACEHOLDER — current token price in USD */
-  tokenPriceUsd: 0.1,
-  /** PLACEHOLDER — price of the next stage in USD */
-  nextStagePriceUsd: 0.15,
-  /** PLACEHOLDER — USD raised so far */
-  raisedUsd: 1_240_000,
-  /** PLACEHOLDER — stage goal in USD */
-  goalUsd: 2_000_000,
-  /** PLACEHOLDER — percentage bonus tokens for the current stage */
+/** Public sale facts shown in the hero widget + ticker. PLACEHOLDERS. */
+export const publicSale = {
+  /** USD price per token (6-dec USDC terms on the sale screen) */
+  priceUsd: 0.03,
+  /** USD raised so far */
+  raisedUsd: 5_141_221,
+  /** Sale soft cap / pool target in USD */
+  goalUsd: 3_900_000,
+  /** Contributor count */
+  participants: 1_424,
+  /** Tokens allocated to this sale (display string) */
+  supplyOnSale: "130 M",
+  /** ISO end date driving the countdowns */
+  saleEndDate: "2026-10-30T00:00:00Z",
+  /** stage bonus percent shown in the widget (set 0 to hide) */
   stageBonusPct: 10,
-  /** PLACEHOLDER — minimum contribution in USD */
-  minContributionUsd: 25,
-  /**
-   * PLACEHOLDER — ISO date the current stage / presale ends.
-   * The hero countdown counts down to this moment.
-   */
-  saleEndDate: "2026-12-01T00:00:00Z",
+  /** minimum contribution in USD */
+  minContributionUsd: 10,
+};
+
+/** Deprecated alias kept for older components — mirrors publicSale. */
+export const sale = {
+  stageLabel: "Token Sale",
+  tokenPriceUsd: publicSale.priceUsd,
+  nextStagePriceUsd: 0.05,
+  raisedUsd: publicSale.raisedUsd,
+  goalUsd: publicSale.goalUsd,
+  stageBonusPct: publicSale.stageBonusPct,
+  minContributionUsd: publicSale.minContributionUsd,
+  saleEndDate: publicSale.saleEndDate,
 };
 
 /**
  * PLACEHOLDER reference exchange rates used only to display approximate
- * "you receive" amounts in the demo widget. Real quotes must come from a
+ * "you receive" amounts in the widget. Real quotes must come from a
  * price oracle / your sale backend at integration time.
  */
 export const referenceRatesUsd: Record<string, number> = {
@@ -53,26 +65,33 @@ export const referenceRatesUsd: Record<string, number> = {
   USDC: 1,
 };
 
+/** Company stats (PLACEHOLDERS — only publish figures you can substantiate). */
+export const companyStats = {
+  headline: "1win — a leader in the iGaming market",
+  subline: "Over 8 years of successful growth",
+  cards: [
+    { value: "+520%", label: "GGR growth over 3 years" },
+    { value: "8k+", label: "Employees" },
+    { value: "100M+", label: "Players" },
+    { value: "96", label: "Countries" },
+  ],
+  chart: { value: "x6", label: "Company growth over 5 years", years: ["2022", "2023", "2024", "2025", "2026"] },
+};
+
+/**
+ * Auditors displayed in the trust strip + footer.
+ * ⚠️ LEAVE EMPTY until you hold actual audit reports — never display
+ * auditor names/logos you do not have.
+ */
+export const auditors: string[] = [];
+
 export type SaleNetwork = "mainnet" | "nile";
 
 /**
  * --------------------------------------------------------------------------
  *  SALE INTEGRATION (TronLink checkout)
- *  The whole flow is implemented in the buy widget + header, but it is GATED:
- *  while `live` is false (or the contract address is empty), the UI only
- *  shows the estimator + informational modal. No funds can move.
- *
- *  TESTING (do this before mainnet):
- *   1. Deploy contracts/OneWinPresale.sol to the NILE TESTNET (compile with
- *      `npm run compile:contract` — EVM "paris", no PUSH0 for TVM).
- *   2. On the contract: addStage(), setAcceptedStable(nile USDT, true),
- *      setTrxPriceUsd() — mirrored in the README.
- *   3. Set  network: "nile",  contractAddress: "<nile contract>".
- *   4. Set `live: true`, switch TronLink to Nile, get free test TRX from the
- *      Nile faucet, and run a real purchase end-to-end.
- *   5. Confirm on nile.tronscan.org: tx confirmed, Contributed event emitted,
- *      tokenEntitlement(your address) increased by the expected amount.
- *   6. Only then redeploy to mainnet, audit, set network: "mainnet".
+ *  gated off until `live: true` + contractAddress — see README for the
+ *  full Nile-testnet workflow before mainnet.
  * --------------------------------------------------------------------------
  */
 export const saleIntegration = {
@@ -100,8 +119,7 @@ export const saleIntegration = {
   } as Record<SaleNetwork, Record<string, string>>,
 
   /**
-   * ABI of contracts/OneWinPresale.sol — generated by `npm run compile:contract`
-   * and imported from contracts/artifacts/. The widget:
+   * ABI of contracts/OneWinPresale.sol — generated by `npm run compile:contract`.
    *  - TRX purchase: plain sendTrx to the contract (hits receive()).
    *  - Stable purchase: (reset-if-needed + exact-amount) `approve`, then
    *    `buyWithToken(address token, uint256 amount)` on the presale contract.
@@ -112,10 +130,10 @@ export const saleIntegration = {
 export const tokenomics = {
   totalSupply: 1_000_000_000,
   allocations: [
-    { label: "Public presale", pct: 40, color: "#ff2433" },
-    { label: "Liquidity & listings", pct: 20, color: "#ff7a45" },
-    { label: "Ecosystem rewards", pct: 20, color: "#f6c453" },
-    { label: "Marketing & partners", pct: 10, color: "#e2e8f0" },
+    { label: "Public presale", pct: 40, color: "#00dc6e" },
+    { label: "Liquidity & listings", pct: 20, color: "#22d3ee" },
+    { label: "Ecosystem rewards", pct: 20, color: "#a78bfa" },
+    { label: "Marketing & partners", pct: 10, color: "#f6c453" },
     { label: "Team (vested)", pct: 10, color: "#64748b" },
   ],
 };
@@ -126,6 +144,9 @@ export const links = {
   twitter: "#",
   telegram: "#",
   discord: "#",
+  instagram: "#",
   whitepaper: "#",
   audit: "#",
+  terms: "#",
+  privacy: "#",
 };

@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { sale } from "@/config";
+import { publicSale } from "@/config";
 
 function getRemaining() {
-  const end = new Date(sale.saleEndDate).getTime();
+  const end = new Date(publicSale.saleEndDate).getTime();
   const diff = Math.max(0, end - Date.now());
   return {
     days: Math.floor(diff / 86_400_000),
@@ -14,7 +14,10 @@ function getRemaining() {
   };
 }
 
-export default function Countdown() {
+const pad = (v?: number) => (v === undefined ? "--" : String(v).padStart(2, "0"));
+
+/** Pill-box countdown matching the reference widget (DD : HH : MM : SS). */
+export default function Countdown({ compact = false }: { compact?: boolean }) {
   const [t, setT] = useState<ReturnType<typeof getRemaining> | null>(null);
 
   useEffect(() => {
@@ -23,29 +26,22 @@ export default function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  const items: Array<{ label: string; value?: number }> = [
-    { label: "Days", value: t?.days },
-    { label: "Hours", value: t?.hours },
-    { label: "Min", value: t?.minutes },
-    { label: "Sec", value: t?.seconds },
-  ];
+  const parts = [t?.days, t?.hours, t?.minutes, t?.seconds];
 
   return (
-    <div className="grid grid-cols-4 gap-2.5">
-      {items.map((i) => (
-        <div key={i.label} className="card px-2 py-3 text-center">
-          <div className="text-2xl font-extrabold tabular-nums text-white sm:text-3xl">
-            <span
-              key={`${i.label}-${i.value ?? "x"}`}
-              className="tick-pop inline-block"
-            >
-              {i.value === undefined ? "--" : String(i.value).padStart(2, "0")}
-            </span>
-          </div>
-          <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-            {i.label}
-          </div>
-        </div>
+    <div className="flex items-center justify-center gap-1.5" role="timer" aria-label="Time remaining">
+      {parts.map((v, i) => (
+        <span key={i} className="flex items-center gap-1.5">
+          {i > 0 && <span className="font-bold text-slate-600">:</span>}
+          <span
+            className={`tick-pop inline-block rounded-lg bg-ink-700 font-bold tabular-nums text-white ${
+              compact ? "px-2 py-1 text-sm" : "px-3 py-2 text-lg sm:px-3.5 sm:text-2xl"
+            }`}
+            key={`${i}-${v ?? "x"}`}
+          >
+            {pad(v)}
+          </span>
+        </span>
       ))}
     </div>
   );

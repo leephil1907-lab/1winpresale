@@ -44,42 +44,42 @@ await sharp(maskBase)
 const ogSvg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0e080b"/>
-      <stop offset="1" stop-color="#080506"/>
+      <stop offset="0" stop-color="#121215"/>
+      <stop offset="1" stop-color="#0a0a0c"/>
     </linearGradient>
     <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff8a8a"/>
-      <stop offset="0.45" stop-color="#ff2433"/>
+      <stop offset="0" stop-color="#7bf1b1"/>
+      <stop offset="0.45" stop-color="#00dc6e"/>
       <stop offset="1" stop-color="#f6c453"/>
     </linearGradient>
     <filter id="blur80" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="80"/>
     </filter>
     <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
-      <path d="M44 0H0V44" fill="none" stroke="rgba(255,130,130,0.055)" stroke-width="1"/>
+      <path d="M44 0H0V44" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
     </pattern>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
-  <ellipse cx="290" cy="300" rx="310" ry="300" fill="#e50914" opacity="0.20" filter="url(#blur80)"/>
+  <ellipse cx="290" cy="300" rx="310" ry="300" fill="#00dc6e" opacity="0.14" filter="url(#blur80)"/>
   <ellipse cx="1120" cy="640" rx="280" ry="240" fill="#f6c453" opacity="0.08" filter="url(#blur80)"/>
 
   <!-- wordmark -->
   <text x="540" y="182" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="bold"
-        fill="#ff8a8a" letter-spacing="7">1WIN TOKEN · TRC-20</text>
+        fill="#7bf1b1" letter-spacing="7">1WIN TOKEN · TRC-20</text>
 
   <!-- headline -->
   <text x="536" y="318" font-family="DejaVu Sans, sans-serif" font-size="112" font-weight="bold"
         fill="url(#grad)" letter-spacing="2">$1WIN</text>
   <text x="540" y="386" font-family="DejaVu Sans, sans-serif" font-size="36" font-weight="bold"
-        fill="#ffffff" letter-spacing="3">PRESALE LIVE ON TRON</text>
+        fill="#ffffff" letter-spacing="3">TOKEN SALE LIVE ON TRON</text>
 
   <!-- stage pill -->
-  <rect x="540" y="428" width="246" height="54" rx="27" fill="#e50914"/>
-  <circle cx="571" cy="455" r="7" fill="#ffffff"/>
+  <rect x="540" y="428" width="246" height="54" rx="27" fill="#00dc6e"/>
+  <circle cx="571" cy="455" r="7" fill="#04140b"/>
   <text x="592" y="463" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="bold"
-        fill="#ffffff" letter-spacing="2">STAGE 1 LIVE</text>
+        fill="#04140b" letter-spacing="2">SALE ENDS SOON</text>
 
   <!-- tagline + domain -->
   <text x="540" y="538" font-family="DejaVu Sans, sans-serif" font-size="20"

@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* TRX-style dark + red palette */
-  --color-ink-950: #080506;
-  --color-ink-900: #0c080a;
-  --color-ink-800: #130b0e;
-  --color-ink-700: #1c1014;
-  --color-line: rgba(255, 130, 130, 0.14);
+  /* Official-site palette: near-black charcoal + bright green */
+  --color-ink-950: #0a0a0c;
+  --color-ink-900: #0e0e11;
+  --color-ink-800: #141418;
+  --color-ink-700: #1b1b20;
+  --color-line: rgba(255, 255, 255, 0.08);
 
-  --color-flame-300: #ff8a8a;
-  --color-flame-400: #ff4049;
-  --color-flame-500: #e50914;
+  --color-flame-300: #7bf1b1;
+  --color-flame-400: #2ee881;
+  --color-flame-500: #00dc6e;
 
   --color-gold-300: #fde08a;
   --color-gold-400: #f6c453;
@@ -66,7 +66,7 @@ body {
 }
 
 ::selection {
-  background: rgba(229, 9, 20, 0.4);
+  background: rgba(0, 220, 110, 0.35);
   color: #ffffff;
 }
 
@@ -83,7 +83,7 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid rgba(255, 64, 73, 0.65);
+  outline: 2px solid rgba(0, 220, 110, 0.65);
   outline-offset: 2px;
 }
 
@@ -101,7 +101,7 @@ h3 {
 /* ---------- helpers ---------- */
 
 .gradient-text {
-  background: linear-gradient(92deg, #ff8a8a 0%, #ff2433 40%, #f6c453 100%);
+  background: linear-gradient(92deg, #7bf1b1 0%, #00dc6e 45%, #f6c453 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -110,12 +110,11 @@ h3 {
 .card {
   background: linear-gradient(
     180deg,
-    rgba(28, 16, 20, 0.72),
-    rgba(10, 7, 8, 0.92)
+    rgba(27, 27, 32, 0.85),
+    rgba(14, 14, 17, 0.95)
   );
   border: 1px solid var(--color-line);
-  border-radius: 1.25rem;
-  backdrop-filter: blur(12px);
+  border-radius: 1.4rem;
   transition:
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.35s ease,
@@ -124,18 +123,18 @@ h3 {
 
 .card-hover:hover {
   transform: translateY(-5px);
-  border-color: rgba(255, 64, 73, 0.35);
-  box-shadow: 0 18px 50px -20px rgba(229, 9, 20, 0.45);
+  border-color: rgba(0, 220, 110, 0.35);
+  box-shadow: 0 18px 50px -20px rgba(0, 220, 110, 0.35);
 }
 
 .btn-primary {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(92deg, #ff2433, #b00020);
-  color: #ffffff;
-  font-weight: 600;
-  border-radius: 0.9rem;
-  box-shadow: 0 10px 34px -10px rgba(229, 9, 20, 0.65);
+  background: linear-gradient(92deg, #00e877, #00b562);
+  color: #04140b;
+  font-weight: 700;
+  border-radius: 1rem;
+  box-shadow: 0 10px 34px -10px rgba(0, 220, 110, 0.55);
   transition:
     transform 0.15s ease,
     filter 0.15s ease,
@@ -143,8 +142,8 @@ h3 {
 }
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  filter: brightness(1.08);
-  box-shadow: 0 14px 40px -10px rgba(229, 9, 20, 0.8);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 40px -10px rgba(0, 220, 110, 0.7);
 }
 .btn-primary:active:not(:disabled) {
   transform: translateY(0);
@@ -164,7 +163,7 @@ h3 {
   background: linear-gradient(
     105deg,
     transparent,
-    rgba(255, 255, 255, 0.32),
+    rgba(255, 255, 255, 0.35),
     transparent
   );
   transform: skewX(-22deg);
@@ -177,8 +176,8 @@ h3 {
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255, 130, 130, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 130, 130, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(
     ellipse 85% 65% at 50% 0%,
@@ -202,7 +201,6 @@ h3 {
 
 /* ---------- motion primitives ---------- */
 
-/* load-in for hero / above-the-fold blocks */
 @keyframes rise {
   from {
     opacity: 0;
@@ -217,7 +215,6 @@ h3 {
   animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* scroll reveal (used by <Reveal/>) */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -240,7 +237,6 @@ h3 {
   transform: none;
 }
 
-/* small value "pop" when a number changes */
 @keyframes pop {
   from {
     transform: scale(0.92);
@@ -255,7 +251,6 @@ h3 {
   animation: pop 0.3s ease;
 }
 
-/* tokenomics donut segments grow in */
 @keyframes segIn {
   from {
     opacity: 0;
@@ -267,7 +262,6 @@ h3 {
   animation-delay: calc(var(--i, 0) * 130ms);
 }
 
-/* modal entrance */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -286,7 +280,6 @@ h3 {
   animation: modalIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* progress bar shine */
 .progress-shine {
   position: relative;
   overflow: hidden;
@@ -313,12 +306,15 @@ h3 {
   }
 }
 
-/* marquee pauses while hovered */
 .marquee:hover .animate-marquee {
   animation-play-state: paused;
 }
 
-/* accessibility: honor reduced-motion */
+/* sale progress gradient (gold → cyan → green, like the reference) */
+.progress-spectrum {
+  background: linear-gradient(90deg, #f6c453 0%, #22d3ee 55%, #00dc6e 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

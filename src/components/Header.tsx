@@ -6,27 +6,33 @@ import { useTronWallet } from "@/components/WalletProvider";
 import { shortenAddress } from "@/lib/tron";
 
 const NAV = [
+  { label: "Sale", href: "#buy" },
   { label: "About", href: "#about" },
-  { label: "How to buy", href: "#how-to-buy" },
+  { label: "Why us", href: "#why-token" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Tokenomics", href: "#tokenomics" },
   { label: "Roadmap", href: "#roadmap" },
   { label: "FAQ", href: "#faq" },
 ];
 
-function Logo({ size = 40 }: { size?: number }) {
+export function Wordmark({ compact = false }: { compact?: boolean }) {
   return (
-    <span
-      className="flex items-center justify-center rounded-xl font-extrabold text-white"
-      style={{
-        width: size,
-        height: size,
-        background: "linear-gradient(135deg, #ff2433 0%, #8f0018 100%)",
-        boxShadow: "0 6px 24px -6px rgba(229, 9, 20, 0.7)",
-        fontSize: size * 0.38,
-      }}
-    >
-      1W
-    </span>
+    <a href="#" className="flex items-end gap-1.5 leading-none" aria-label={site.tokenName}>
+      <span
+        className={`font-black italic tracking-tight text-white ${
+          compact ? "text-xl" : "text-2xl"
+        }`}
+      >
+        1win
+      </span>
+      <span
+        className={`rounded-md bg-white px-1.5 py-0.5 font-extrabold tracking-widest text-ink-950 ${
+          compact ? "text-[9px]" : "text-[10px]"
+        }`}
+      >
+        TOKEN
+      </span>
+    </a>
   );
 }
 
@@ -43,14 +49,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const primaryButtonLabel =
+  const label =
     wallet.installed === false
       ? "Install TronLink"
       : wallet.status === "connecting"
         ? "Connecting…"
-        : "Connect Wallet";
+        : "Connect wallet";
 
-  const primaryButtonAction =
+  const action =
     wallet.installed === false
       ? () => window.open("https://www.tronlink.org", "_blank", "noreferrer")
       : wallet.connect;
@@ -64,19 +70,9 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#" className="flex items-center gap-3" aria-label={site.tokenName}>
-          <Logo />
-          <span className="leading-tight">
-            <span className="block text-sm font-bold text-white">
-              {site.tokenName}
-            </span>
-            <span className="block text-[11px] font-semibold tracking-wider text-flame-300">
-              {site.ticker} · {site.network}
-            </span>
-          </span>
-        </a>
+        <Wordmark />
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 xl:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
@@ -89,13 +85,9 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          {/* primary action — Buy CTA pre-launch, wallet connect once live */}
           {!live ? (
-            <a
-              href="#buy"
-              className="btn-primary hidden px-5 py-2 text-sm sm:inline-block"
-            >
-              Buy {site.ticker}
+            <a href="#buy" className="btn-primary hidden px-5 py-2 text-sm sm:inline-block">
+              Connect wallet
             </a>
           ) : wallet.status === "connected" && wallet.address ? (
             <div className="hidden items-center gap-2 sm:flex">
@@ -123,29 +115,21 @@ export default function Header() {
             </div>
           ) : (
             <button
-              onClick={primaryButtonAction}
+              onClick={action}
               disabled={wallet.status === "connecting"}
               className="btn-primary hidden px-5 py-2 text-sm sm:inline-block"
             >
-              {primaryButtonLabel}
+              {label}
             </button>
           )}
 
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-line text-slate-300 lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-line text-slate-300 xl:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={open}
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {open ? (
                 <>
                   <line x1="5" y1="5" x2="19" y2="19" />
@@ -164,7 +148,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="menu-in border-t border-line px-4 py-4 sm:px-6 lg:hidden">
+        <nav className="menu-in border-t border-line px-4 py-4 sm:px-6 xl:hidden">
           <div className="flex flex-col gap-1">
             {NAV.map((n) => (
               <a
@@ -182,7 +166,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className="btn-primary mt-2 px-5 py-2.5 text-center text-sm"
               >
-                Buy {site.ticker}
+                Connect wallet
               </a>
             ) : wallet.status === "connected" && wallet.address ? (
               <div className="mt-2 flex items-center gap-2">
@@ -207,12 +191,12 @@ export default function Header() {
             ) : (
               <button
                 onClick={() => {
-                  primaryButtonAction();
+                  action();
                   setOpen(false);
                 }}
                 className="btn-primary mt-2 px-5 py-2.5 text-sm"
               >
-                {primaryButtonLabel}
+                {label}
               </button>
             )}
           </div>
