@@ -18,11 +18,11 @@ const LABELS: Record<ItemId, string> = {
   participants: "Participants",
   pool: "Pool",
   oversub: "Sale activity",
-  price: "Price",
+  price: "Reference price",
   bonus: "Stage bonus",
-  supply: "Supply",
+  supply: "Reference supply",
   network: "Network",
-  ends: "Sale ends",
+  ends: "Sale date",
 };
 
 /**
@@ -34,9 +34,7 @@ export default function Marquee() {
   const oversub = statsAvailable && publicSale.goalUsd > 0
     ? (publicSale.raisedUsd / publicSale.goalUsd).toFixed(2)
     : null;
-  const ends = new Date(publicSale.saleEndDate).toLocaleDateString("en-US", {
-    month: "short", day: "numeric",
-  });
+  const ends = "Not announced";
 
   const value = (id: ItemId) => {
     switch (id) {
@@ -53,7 +51,7 @@ export default function Marquee() {
       case "bonus":
         return <b className="font-semibold text-slate-400">Not announced</b>;
       case "supply":
-        return <b className="font-semibold text-white">{publicSale.supplyOnSale}</b>;
+        return <b className="font-semibold text-slate-300">{publicSale.supplyOnSale} (reference)</b>;
       case "network":
         return <b className="font-semibold text-white">TRON · TRC-20</b>;
       case "ends":
