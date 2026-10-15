@@ -37,6 +37,9 @@ export default function WhyToken() {
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
               Why {site.tokenName}?
             </p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Utility, token economics and the TRON network
+            </h2>
           </div>
         </Reveal>
 
