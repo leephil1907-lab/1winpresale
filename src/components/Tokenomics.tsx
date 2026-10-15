@@ -17,7 +17,7 @@ function Donut() {
           stroke="rgba(255,255,255,0.05)"
           strokeWidth="26"
         />
-        {tokenomics.allocations.map((a, idx) => {
+        {referenceAllocations.map((a, idx) => {
           const dash = (a.pct / 100) * C;
           const offset = (acc / 100) * C;
           acc += a.pct;
@@ -109,7 +109,7 @@ export default function Tokenomics() {
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-end lg:gap-12">
             <Donut />
             <ul className="w-full max-w-[220px] space-y-3">
-              {tokenomics.allocations.map((a) => (
+              {referenceAllocations.map((a) => (
                 <li
                   key={a.label}
                   className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1"
