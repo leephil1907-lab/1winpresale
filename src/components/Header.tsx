@@ -87,7 +87,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           {!live ? (
             <a href="#buy" className="btn-primary hidden px-5 py-2 text-sm sm:inline-block">
-              Connect wallet
+              View sale status
             </a>
           ) : wallet.status === "connected" && wallet.address ? (
             <div className="hidden items-center gap-2 sm:flex">
@@ -166,7 +166,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className="btn-primary mt-2 px-5 py-2.5 text-center text-sm"
               >
-                Connect wallet
+                View sale status
               </a>
             ) : wallet.status === "connected" && wallet.address ? (
               <div className="mt-2 flex items-center gap-2">
