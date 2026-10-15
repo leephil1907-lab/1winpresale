@@ -1,15 +1,6 @@
 import Reveal from "./Reveal";
 import { links, sale, site, tokenomics } from "@/config";
 
-const referenceAllocations = [
-  { label: "Games", pct: 25, color: "#00dc6e" },
-  { label: "Liquidity", pct: 20, color: "#22d3ee" },
-  { label: "Wager rewards", pct: 18, color: "#a78bfa" },
-  { label: "Token sale", pct: 13, color: "#f6c453" },
-  { label: "Treasury", pct: 10, color: "#64748b" },
-  { label: "TMA airdrop", pct: 8, color: "#fb7185" },
-  { label: "Marketing", pct: 6, color: "#60a5fa" },
-];
 
 const R = 80;
 const C = 2 * Math.PI * R;
@@ -27,7 +18,7 @@ function Donut() {
           stroke="rgba(255,255,255,0.05)"
           strokeWidth="26"
         />
-        {referenceAllocations.map((a, idx) => {
+        {tokenomics.allocations.map((a, idx) => {
           const dash = (a.pct / 100) * C;
           const offset = (acc / 100) * C;
           acc += a.pct;
@@ -119,7 +110,7 @@ export default function Tokenomics() {
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-end lg:gap-12">
             <Donut />
             <ul className="w-full max-w-[220px] space-y-3">
-              {referenceAllocations.map((a) => (
+              {tokenomics.allocations.map((a) => (
                 <li
                   key={a.label}
                   className="flex items-center gap-3 text-sm transition-transform duration-200 hover:translate-x-1"
