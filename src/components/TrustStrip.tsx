@@ -4,7 +4,7 @@ import { saleIntegration, site } from "@/config";
 export default function TrustStrip() {
   const contractReady = saleIntegration.live && Boolean(saleIntegration.contractAddress);
   return (
-    <section className="px-4 pb-8 sm:px-6">
+    <section id="verification" className="px-4 pb-8 sm:px-6">
       <div className="mx-auto grid w-full max-w-4xl gap-3 sm:grid-cols-3">
         <div className="card flex items-center gap-3 p-4">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.05] text-slate-300" aria-hidden>
