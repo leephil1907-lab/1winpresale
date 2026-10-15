@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { publicSale } from "@/config";
+import { publicSale, saleIntegration } from "@/config";
 
 const pad = (v?: number) => (v === undefined ? "--" : String(v).padStart(2, "0"));
 
@@ -27,20 +27,21 @@ function useRemaining() {
 /** Fixed bottom sale bar on mobile (like the reference). */
 export default function StickySaleBar() {
   const t = useRemaining();
+  const live = saleIntegration.live && Boolean(saleIntegration.contractAddress);
 
   return (
     <div className="fixed inset-x-3 bottom-3 z-40 lg:hidden">
       <div className="card flex items-center justify-between gap-3 rounded-2xl px-4 py-3 shadow-2xl">
         <div className="min-w-0">
           <div className="truncate text-[11px] font-medium text-slate-500">
-            Token Sale ends in
+            {live ? "Token Sale ends in" : "Sale status"}
           </div>
           <div className="mt-0.5 font-mono text-sm font-bold tabular-nums text-white">
-            {pad(t?.d)} : {pad(t?.h)} : {pad(t?.m)} : {pad(t?.s)}
+            {live ? `${pad(t?.d)} : ${pad(t?.h)} : ${pad(t?.m)} : ${pad(t?.s)}` : "Not configured"}
           </div>
         </div>
         <a href="#buy" className="btn-primary shrink-0 px-5 py-2.5 text-sm">
-          Connect wallet
+          View status
         </a>
       </div>
     </div>
