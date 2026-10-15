@@ -61,7 +61,7 @@ export default function LiveChat() {
             </span>
             <div className="flex-1">
               <div className="text-sm font-bold text-white">1win Support</div>
-              <div className="text-[11px] font-medium text-emerald-400">Online now</div>
+              <div className="text-[11px] font-medium text-slate-400">Contact options</div>
             </div>
             <button
               onClick={() => setOpen(false)}
