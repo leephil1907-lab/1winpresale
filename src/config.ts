@@ -14,12 +14,10 @@ export const site = {
   ticker: "$1WIN",
   network: "TRON",
   tokenStandard: "TRC-20",
-  siteUrl: "https://1wintoken.com",
-  tagline: "Token from the iGaming leader",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "",
+  tagline: "A TRON-based token-sale concept inspired by the reference",
   description:
-    "$1WIN is a utility token on the TRON network designed to power rewards, cashback, " +
-    "staking and exclusive experiences across the 1win ecosystem — with fast, " +
-    "low-fee TRC-20 transfers.",
+    "An independent TRON-based concept for a $1WIN-style token sale. This is not the official 1win token sale, and sale participation remains unavailable until the contract and terms are verified.",
 };
 
 /** Public sale facts shown in the hero widget + ticker. PLACEHOLDERS. */
