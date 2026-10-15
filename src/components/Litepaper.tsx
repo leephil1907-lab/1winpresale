@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 /** Litepaper access panel; the action remains unavailable until a real document URL is configured. */
 export default function Litepaper() {
   return (
-    <section className="px-4 pb-6 sm:px-6">
+    <section id="litepaper" className="px-4 pb-6 sm:px-6">
       <Reveal>
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 rounded-3xl border border-line bg-gradient-to-r from-white/[0.035] to-transparent p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div>
