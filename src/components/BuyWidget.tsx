@@ -43,7 +43,8 @@ export default function BuyWidget() {
   const bonus = (base * publicSale.stageBonusPct) / 100;
   const receive = base + bonus;
   const belowMin = pay > 0 && usd < publicSale.minContributionUsd;
-  const progress = (publicSale.raisedUsd / publicSale.goalUsd) * 100;
+  const statsAvailable = false; // Keep public figures hidden until an authoritative sale data source is connected.
+  const progress = statsAvailable && publicSale.goalUsd > 0 ? (publicSale.raisedUsd / publicSale.goalUsd) * 100 : 0;
 
   // close the currency dropdown on outside click
   useEffect(() => {
@@ -130,15 +131,15 @@ export default function BuyWidget() {
           <div className="mt-6 rounded-2xl border border-line bg-ink-800/80 p-5 text-left">
             <div className="flex flex-wrap items-baseline gap-2">
               <span className="text-2xl font-extrabold text-white sm:text-3xl">
-                {usdFmt(publicSale.raisedUsd)}
+                {statsAvailable ? usdFmt(publicSale.raisedUsd) : "Awaiting verified data"}
               </span>
-              <span className="text-sm text-slate-500">of {usdFmt(publicSale.goalUsd)}</span>
+              {statsAvailable && <span className="text-sm text-slate-500">of {usdFmt(publicSale.goalUsd)}</span>}
             </div>
             <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/10">
-              <div
+              {statsAvailable && <div
                 className="progress-shine progress-spectrum h-full rounded-full transition-all duration-700"
                 style={{ width: `${Math.min(100, progress)}%` }}
-              />
+              />}
             </div>
             <dl className="mt-4 divide-y divide-line text-sm">
               <div className="flex items-center justify-between py-2.5">
@@ -146,11 +147,11 @@ export default function BuyWidget() {
                   Oversubscription
                   <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-white/10 text-[9px] text-slate-400" title="Raised amount vs. pool target">i</span>
                 </dt>
-                <dd className="font-bold text-white">x{(publicSale.raisedUsd / publicSale.goalUsd).toFixed(2)}</dd>
+                <dd className="font-bold text-white">{statsAvailable && publicSale.goalUsd > 0 ? `x${(publicSale.raisedUsd / publicSale.goalUsd).toFixed(2)}` : "Not available"}</dd>
               </div>
               <div className="flex items-center justify-between py-2.5">
                 <dt className="text-slate-400">Participants</dt>
-                <dd className="font-bold text-white">{publicSale.participants.toLocaleString("en-US")}</dd>
+                <dd className="font-bold text-white">{statsAvailable ? publicSale.participants.toLocaleString("en-US") : "Not available"}</dd>
               </div>
               <div className="flex items-center justify-between py-2.5">
                 <dt className="flex items-center gap-1.5 text-slate-400">
@@ -162,6 +163,8 @@ export default function BuyWidget() {
             </dl>
           </div>
         </div>
+
+        {!live && <div className="rounded-2xl border border-amber-400/20 bg-amber-300/[0.06] px-4 py-3 text-center text-sm leading-relaxed text-amber-100/80">Purchases are disabled until a verified TRON contract, sale terms, and claim flow are published.</div>}
 
         {/* ---- deposit card ---- */}
         <div className="card p-6 sm:p-7">
