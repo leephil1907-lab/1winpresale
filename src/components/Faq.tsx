@@ -37,6 +37,13 @@ export default function Faq() {
   return (
     <section id="faq" className="relative py-16 sm:py-24">
       <div className="mx-auto w-full max-w-3xl px-4 sm:px-6">
+        <Reveal>
+          <div className="mb-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-flame-400">Support</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Frequently asked questions</h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-400">Answers about token utility, participation, distribution and network details.</p>
+          </div>
+        </Reveal>
         <div className="space-y-3">
           {QA.map((item, i) => {
             const open = openIndex === i;
