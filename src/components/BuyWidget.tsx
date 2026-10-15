@@ -225,14 +225,11 @@ export default function BuyWidget() {
 
           {/* rate + estimate */}
           <p className="mt-4 text-center text-sm font-semibold text-slate-300">
-            1WIN = {publicSale.priceUsd.toFixed(2).replace(".", ",")} USDC
+            Reference price: ${publicSale.priceUsd.toFixed(2)} per {site.ticker}
           </p>
           {pay > 0 && (
             <p className="mt-1.5 text-center text-xs text-slate-500">
               Estimated amount ≈ <b className="text-white">{fmt(receive, 0)} {site.ticker}</b>
-              {publicSale.stageBonusPct > 0 && (
-                <> · incl. {fmt(bonus, 0)} bonus ({publicSale.stageBonusPct}%)</>
-              )}
             </p>
           )}
           {belowMin && (
@@ -278,7 +275,7 @@ export default function BuyWidget() {
           {wallet.error && <p className="mt-2 text-center text-xs text-flame-300">{wallet.error}</p>}
 
           <p className="mt-4 text-center text-[11px] leading-relaxed text-slate-600">
-            Estimates use reference rates; the final quote is set at checkout.
+            Estimate only. Sale pricing and payment quotes are not live while checkout is disabled.
             Crypto assets are high risk — nothing here is financial advice.
           </p>
         </div>
