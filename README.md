@@ -84,6 +84,24 @@ changes, progress-bar shine, button shine sweeps, card lift/glow hovers,
 animated grid backdrop, floating coin, pause-on-hover marquee, donut segment
 growth — all disabled under `prefers-reduced-motion`.
 
+## Owner console (`/admin`)
+
+Hidden operator route — **no links to it exist anywhere on the public site**,
+it is excluded from search indexing (`noindex`), and access control is enforced
+**on-chain**: the page reads `owner()` from the deployed contract and only the
+connected wallet that matches sees the dashboard (anyone else gets a
+"not the owner wallet" screen; writes revert at the contract level via
+`onlyOwner` regardless of the UI).
+
+It shows live contract state (raised, allocations, stages, prices, balances,
+stablecoin whitelist, pause/claim status) and exposes every `onlyOwner`
+function as a guarded action card: add stage, set TRX price, set minimum,
+stablecoin whitelist, funds wallet, sweep, enable claims (TGE), emergency
+pause/unpause. All go through TronLink signing — no keys anywhere.
+
+Until a contract address is configured, `/admin` displays the deployment
+setup steps instead.
+
 ## ⚠️ Before launch checklist
 
 - [ ] `src/config.ts`: real sale numbers, `saleEndDate`, social/whitepaper/audit links
