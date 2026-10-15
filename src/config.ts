@@ -13,6 +13,7 @@ export const site = {
   ticker: "$1WIN",
   network: "TRON",
   tokenStandard: "TRC-20",
+  siteUrl: "https://1wintoken.com",
   tagline: "The utility token of the 1win gaming universe",
   description:
     "$1WIN is a utility token on the TRON network designed to power rewards, cashback, " +

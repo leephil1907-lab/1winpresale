@@ -70,6 +70,34 @@ body {
   color: #ffffff;
 }
 
+/* ---------- global polish ---------- */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(255, 64, 73, 0.65);
+  outline-offset: 2px;
+}
+
+/* mobile menu entrance */
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.menu-in {
+  animation: menuIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* ---------- helpers ---------- */
 
 .gradient-text {

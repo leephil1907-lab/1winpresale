@@ -164,7 +164,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-line px-4 py-4 sm:px-6 lg:hidden">
+        <nav className="menu-in border-t border-line px-4 py-4 sm:px-6 lg:hidden">
           <div className="flex flex-col gap-1">
             {NAV.map((n) => (
               <a
