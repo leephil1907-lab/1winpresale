@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface RevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   /** stagger delay in ms */
   delay?: number;
   /** slide direction: up (default), left, or right */
@@ -12,9 +13,8 @@ interface RevealProps {
 }
 
 /**
- * Scroll-reveal wrapper. Fades/slides children in once when they enter the
- * viewport (IntersectionObserver). Purely cosmetic — content is present in
- * SSR HTML, and users with prefers-reduced-motion see it immediately.
+ * Framer Motion scroll reveal. Runs once when entering the viewport, supports
+ * stagger delays and respects the user's reduced-motion accessibility setting.
  */
 export default function Reveal({
   children,
@@ -22,39 +22,41 @@ export default function Reveal({
   from = "up",
   className = "",
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const offset =
+    from === "left"
+      ? { x: -38, y: 0 }
+      : from === "right"
+        ? { x: 38, y: 0 }
+        : { x: 0, y: 30 };
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.disconnect();
-        }
+  const variants = {
+    hidden: {
+      opacity: 0,
+      ...offset,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration: 0.72,
+        delay: delay / 1000,
+        ease: [0.16, 1, 0.3, 1] as const,
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const dirClass =
-    from === "left" ? "reveal-x-left" : from === "right" ? "reveal-x-right" : "";
+    },
+  };
 
   return (
-    <div
-      ref={ref}
-      className={`reveal ${dirClass} ${visible ? "is-visible" : ""} ${className}`}
-      style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
+    <motion.div
+      className={className}
+      variants={variants}
+      initial={reduceMotion ? false : "hidden"}
+      animate={reduceMotion ? "visible" : undefined}
+      whileInView={reduceMotion ? undefined : "visible"}
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -40px 0px" }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
