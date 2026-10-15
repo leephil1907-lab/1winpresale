@@ -15,7 +15,7 @@ const CARDS = [
     gradient: "from-[#f5b03d]/20 via-[#8a5a1e]/10 to-transparent",
   },
   {
-    tag: "#NETWORK",
+    tag: "#TOKENOMICS",
     title: "Token burning",
     text: "Burns can reduce circulating supply when executed on-chain and supported by verifiable transaction records.",
     gradient: "from-[#f5b03d]/20 via-[#8a5a1e]/10 to-transparent",
