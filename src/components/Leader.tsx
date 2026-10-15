@@ -1,81 +1,53 @@
 import Reveal from "./Reveal";
-import CountUp from "./CountUp";
-import { companyStats } from "@/config";
 
-// simple rising area curve across the 2022–2026 axis
-const CHART_D =
-  "M0,84 C30,80 55,74 85,66 C115,58 140,56 170,47 C200,38 225,34 255,26 C285,18 310,14 330,10";
+const STATUS = [
+  { value: "TRON", label: "Target network" },
+  { value: "TRC-20", label: "Token standard" },
+  { value: "Pending", label: "Sale contract" },
+  { value: "Pending", label: "Independent audit" },
+];
 
 export default function Leader() {
   return (
     <section id="about" className="relative py-16 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <div className="max-w-2xl">
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              {companyStats.headline}
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-flame-400">Project overview</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              A TRON adaptation built around <span className="gradient-text">transparent status</span>
             </h2>
-            <p className="mt-3 text-slate-400">{companyStats.subline}</p>
+            <p className="mt-3 leading-relaxed text-slate-400">
+              This independent implementation mirrors the reference site's information architecture while keeping sale activity, contract verification and audit claims unpublished until they can be checked.
+            </p>
           </div>
         </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {companyStats.cards.map((c, i) => (
-            <Reveal key={c.label} delay={i * 90}>
-              <div className="card card-hover stat-glow relative h-full overflow-hidden p-6">
+          {STATUS.map((item, i) => (
+            <Reveal key={item.label} delay={i * 80}>
+              <div className="card card-hover relative h-full overflow-hidden p-6">
                 <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-flame-500/10 blur-2xl" />
-                <CountUp
-                  value={c.value}
-                  className="text-4xl font-black tracking-tight text-white sm:text-5xl"
-                />
-                <div className="mt-2 text-sm leading-snug text-slate-400">{c.label}</div>
+                <div className="text-2xl font-black tracking-tight text-white sm:text-3xl">{item.value}</div>
+                <div className="mt-2 text-sm leading-snug text-slate-400">{item.label}</div>
               </div>
             </Reveal>
           ))}
         </div>
 
-        {/* growth chart card (light panel, like the reference) — line draws itself in */}
         <Reveal delay={120}>
-          <div className="mt-4 overflow-hidden rounded-3xl bg-[#eceef1] p-6 text-ink-950 sm:p-8">
-            <div className="flex items-baseline gap-3">
-              <CountUp
-                value={companyStats.chart.value}
-                className="text-4xl font-black tracking-tight sm:text-5xl"
-              />
-              <span className="text-sm font-medium leading-snug text-slate-600">
-                {companyStats.chart.label}
-              </span>
+          <div className="mt-4 grid gap-6 rounded-3xl bg-[#eceef1] p-6 text-ink-950 sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Launch readiness</p>
+              <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">Contract first. Sale second.</h3>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600">
+                Before contributions can be enabled, the project needs a deployed TRON contract, published sale and claim terms, verified payment-token configuration, and independent security review.
+              </p>
             </div>
-            <svg
-              viewBox="0 0 330 100"
-              className="mt-4 w-full"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#00dc6e" stopOpacity="0.35" />
-                  <stop offset="1" stopColor="#00dc6e" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path d={`${CHART_D} L330,100 L0,100 Z`} fill="url(#area)" className="chart-area" />
-              <path
-                d={CHART_D}
-                fill="none"
-                stroke="#0e0e11"
-                strokeOpacity="0.25"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                pathLength={1}
-                className="chart-line"
-              />
-              <circle cx="330" cy="10" r="5" fill="none" stroke="#00dc6e" strokeWidth="3" className="chart-dot" />
-            </svg>
-            <div className="mt-2 flex justify-between text-[11px] font-medium text-slate-500">
-              {companyStats.chart.years.map((y) => (
-                <span key={y}>{y}</span>
-              ))}
-            </div>
+            <a href="#verification" className="inline-flex w-fit items-center gap-2 rounded-xl bg-ink-950 px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5">
+              View verification status
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
           </div>
         </Reveal>
       </div>
