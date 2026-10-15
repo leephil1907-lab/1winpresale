@@ -8,6 +8,8 @@ import WhyToken from "@/components/WhyToken";
 import PricingDeck from "@/components/PricingDeck";
 import TopParticipants from "@/components/TopParticipants";
 import HowToBuy from "@/components/HowToBuy";
+import TopParticipants from "@/components/TopParticipants";
+import HowToBuy from "@/components/HowToBuy";
 import Tokenomics from "@/components/Tokenomics";
 import Roadmap from "@/components/Roadmap";
 import Faq from "@/components/Faq";
